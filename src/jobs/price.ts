@@ -36,7 +36,7 @@ const handler = async (args: Arguments) => {
   await client.connect();
 
   const currencies = await client
-    .query(`SELECT * FROM currencies WHERE code != 'USD';`)
+    .query(`SELECT * FROM currency WHERE code != 'USD';`)
     .then((r) => r.rows as Currency[]);
 
   const currenciesToProcess = currencies.filter(
@@ -57,7 +57,7 @@ const handler = async (args: Arguments) => {
         timeoutablePromise(
           client
             .query(
-              `SELECT date FROM prices WHERE currency_id = $1 ORDER BY date DESC LIMIT 1;`,
+              `SELECT date FROM price WHERE currency_id = $1 ORDER BY date DESC LIMIT 1;`,
               [currency.id]
             )
             .then((r) => r?.rows?.[0] as Price)
@@ -91,7 +91,7 @@ const handler = async (args: Arguments) => {
           JSON.stringify(rates, null, 2)
         );
       } else {
-        const query = `INSERT INTO prices (currency_id, date, price) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`;
+        const query = `INSERT INTO price (currency_id, date, price) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`;
         for (const [date, { [currency.code]: rate }] of Object.entries(rates)) {
           await retry(() =>
             timeoutablePromise(client.query(query, [currency.id, date, rate]))
