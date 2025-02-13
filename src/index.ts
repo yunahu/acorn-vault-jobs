@@ -26,7 +26,7 @@ const run = async () => {
 
   if (!handler) {
     console.log(`Job '${args.jobName}' does not exist`);
-    process.exit(-1);
+    process.exit(1);
   }
 
   handler(args);
