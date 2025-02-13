@@ -91,7 +91,7 @@ const handler = async (args: Arguments) => {
 
       if (args.local) {
         fs.writeFileSync(
-          `out/price${currency.code}.json`,
+          `out/price-${currency.code.toLowerCase()}.json`,
           JSON.stringify(rates, null, 2)
         );
       } else {
