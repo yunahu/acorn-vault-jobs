@@ -1,9 +1,9 @@
 {
 	"name": "acorn-vault-jobs",
 	"version": "1.0.0",
-	"main": "src/index.ts",
+	"main": "src/app.ts",
 	"scripts": {
-		"job": "nodemon src/index.ts"
+		"job": "nodemon src/app.ts"
 	},
 	"repository": {
 		"type": "git",

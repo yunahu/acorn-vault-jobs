@@ -6,13 +6,13 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 export interface Arguments {
-  jobName: string;
+  job: string;
 }
 
 const run = async () => {
   const args: Arguments = yargs(hideBin(process.argv))
     .options({
-      jobName: {
+      job: {
         alias: "j",
         type: "string",
         demandOption: true,
@@ -20,12 +20,12 @@ const run = async () => {
     })
     .parseSync();
 
-  const { default: handler } = await import(`./jobs/${args.jobName}`).catch(
+  const { default: handler } = await import(`./jobs/${args.job}`).catch(
     () => ({})
   );
 
   if (!handler) {
-    console.log(`Job '${args.jobName}' does not exist`);
+    console.log(`Job '${args.job}' does not exist`);
     process.exit(1);
   }
 
