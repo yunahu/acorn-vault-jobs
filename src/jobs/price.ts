@@ -35,9 +35,13 @@ const handler = async (args: Arguments) => {
 
   await client.connect();
 
-  const currencies = await client
-    .query(`SELECT * FROM currency WHERE code != 'USD';`)
-    .then((r) => r.rows as Currency[]);
+  const currencies = await retry(() =>
+    timeoutablePromise(
+      client
+        .query(`SELECT * FROM currency WHERE code != 'USD';`)
+        .then((r) => r.rows as Currency[])
+    )
+  );
 
   const currenciesToProcess = currencies.filter(
     (x) => !args.currency || args.currency!.toUpperCase() === x.code
