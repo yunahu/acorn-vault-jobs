@@ -1,4 +1,4 @@
-import "dotenv/config";
+import 'dotenv/config';
 
 interface Environment {
   PG_USER: string;
@@ -9,10 +9,10 @@ interface Environment {
 }
 
 const env: Environment = {
-  PG_USER: process.env.PG_USER ?? "postgres",
+  PG_USER: process.env.PG_USER ?? 'postgres',
   PG_PASSWORD: process.env.PG_PASSWORD!,
   PG_HOST: process.env.PG_HOST!,
-  PG_PORT: parseInt(process.env.PG_PORT ?? "5432"),
+  PG_PORT: parseInt(process.env.PG_PORT ?? '5432'),
   PG_DB: process.env.PG_DB!,
 };
 

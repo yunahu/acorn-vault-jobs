@@ -7,9 +7,9 @@ export const retry = async <T>(
   delay = 3000
 ): Promise<T> =>
   fn().catch(async (err) => {
-    console.error("Failed:", err);
+    console.error('Failed:', err);
     if (retries) {
-      console.log("Waiting", delay / 1000, "seconds...");
+      console.log('Waiting', delay / 1000, 'seconds...');
       await wait(delay);
       console.log(`Retrying...`, retries);
       return retry(fn, --retries, delay * 2);
@@ -23,7 +23,7 @@ export const timeoutablePromise = <T>(
   ms: number = 5000
 ): Promise<T> => {
   const timeout = new Promise<T>((_, reject) => {
-    setTimeout(() => reject("Timeout..."), ms);
+    setTimeout(() => reject('Timeout...'), ms);
   });
   return Promise.race([promise, timeout]);
 };

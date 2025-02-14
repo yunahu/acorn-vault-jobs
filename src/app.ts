@@ -1,7 +1,7 @@
-import yargs from "yargs/yargs";
-import { hideBin } from "yargs/helpers";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(utc);
 
@@ -13,8 +13,8 @@ const run = async () => {
   const args: Arguments = yargs(hideBin(process.argv))
     .options({
       job: {
-        alias: "j",
-        type: "string",
+        alias: 'j',
+        type: 'string',
         demandOption: true,
       },
     })

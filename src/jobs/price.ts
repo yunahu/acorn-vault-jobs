@@ -1,8 +1,8 @@
-import axios from "axios";
-import dayjs from "dayjs";
-import fs from "fs";
-import client from "src/services/postgres";
-import { retry, timeoutablePromise } from "src/utils/helpers";
+import axios from 'axios';
+import dayjs from 'dayjs';
+import fs from 'fs';
+import client from 'src/services/postgres';
+import { retry, timeoutablePromise } from 'src/utils/helpers';
 
 interface Arguments {
   currency?: string;
@@ -28,10 +28,10 @@ interface Price {
   price: number;
 }
 
-const DEFAULT_START_DATE = dayjs.utc("2025-01-01");
+const DEFAULT_START_DATE = dayjs.utc('2025-01-01');
 
 const handler = async (args: Arguments) => {
-  console.log("Initializing price job...");
+  console.log('Initializing price job...');
 
   await client.connect();
 
@@ -68,11 +68,11 @@ const handler = async (args: Arguments) => {
         )
       );
 
-      if (lastRecord && dayjs.utc(lastRecord.date).isSame(dayjs.utc(), "day"))
+      if (lastRecord && dayjs.utc(lastRecord.date).isSame(dayjs.utc(), 'day'))
         continue;
 
       const from = lastRecord
-        ? dayjs.utc(lastRecord.date).add(1, "day")
+        ? dayjs.utc(lastRecord.date).add(1, 'day')
         : DEFAULT_START_DATE;
 
       const rates = await retry(() =>
@@ -117,13 +117,13 @@ const handler = async (args: Arguments) => {
 
     console.log(
       `Finished processing ${currency.code}...(${
-        i + 1 + "/" + currenciesToProcess.length
+        i + 1 + '/' + currenciesToProcess.length
       })`
     );
   }
 
   await client.end();
-  console.log("Finished price job...");
+  console.log('Finished price job...');
 };
 
 export default handler;
