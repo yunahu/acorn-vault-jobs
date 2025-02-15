@@ -44,7 +44,7 @@ const handler = async (args: Arguments) => {
   );
 
   const currenciesToProcess = currencies.filter(
-    (x) => !args.currency || args.currency!.toUpperCase() === x.code
+    (x) => !args.currency || args.currency.toUpperCase() === x.code
   );
 
   const to = dayjs.utc();
