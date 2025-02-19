@@ -2,6 +2,7 @@ import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import jobs from 'src/jobs/jobs';
 
 dayjs.extend(utc);
 
@@ -20,12 +21,10 @@ const run = async () => {
     })
     .parseSync();
 
-  const { default: handler } = await import(`./jobs/${args.job}`).catch(
-    () => ({})
-  );
+  const handler = jobs[args.job];
 
   if (!handler) {
-    console.log(`Job '${args.job}' does not exist`);
+    console.error(`Job '${args.job}' does not exist`);
     process.exit(1);
   }
 

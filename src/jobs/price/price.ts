@@ -109,7 +109,7 @@ const handler = async (args: Arguments) => {
         );
       }
     } catch (err) {
-      console.log(
+      console.error(
         `An error ocurred while processing currency ${currency.code}`,
         err
       );
