@@ -1,10 +1,11 @@
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import jobs from 'src/jobs/jobs';
+import dayjs from 'dayjs';
 
 dayjs.extend(utc);
+
+import jobs from 'src/jobs/jobs';
 
 export interface Arguments {
   job: string;
