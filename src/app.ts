@@ -1,7 +1,7 @@
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
-import utc from 'dayjs/plugin/utc';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs/yargs';
 
 dayjs.extend(utc);
 
